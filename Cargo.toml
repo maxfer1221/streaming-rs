@@ -2,7 +2,7 @@
 name = "stream-rs"
 version = "0.1.0"
 authors = ["Maximo Fernandez <maxfer1221@gmail.com>"]
-description = "
+description = "Video streaming"
 liscence = "MIT"
 repository = "https://github.com/maxfer1221/stream-rs"
 readme = "README.md"
