@@ -1,3 +1,5 @@
+// OUTDATED
+// THIS IS FORM AN OLD PROJECT, YET TO BE CHANGED
 const server = "http://127.0.0.1:8000"
 
 async function post_req(input) {
