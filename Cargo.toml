@@ -1,6 +1,6 @@
 [package]
 name = "stream-rs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Maximo Fernandez <maxfer1221@gmail.com>"]
 description = "Video streaming"
 liscence = "MIT"

@@ -34,8 +34,12 @@ impl ResponseType {
 
 // failable + safe file fetching
 pub fn get_file(paths: Vec<&str>) -> std::io::Result<File> {
-    let mut wd: PathBuf = std::env::current_dir()?;
+    let mut wd: PathBuf = std::env::current_exe()?;
+    wd.pop();
+    wd.pop();
+    wd.pop();
     wd.push("statics");
+    println!("{:?}", wd);
     for path in paths {
         if path == ".." {
            return Err(Error::new(PermissionDenied, "'..' cannot be used for file pathing"));
