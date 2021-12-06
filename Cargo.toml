@@ -1,6 +1,6 @@
 [package]
 name = "stream-rs"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Maximo Fernandez <maxfer1221@gmail.com>"]
 description = "Video streaming"
 liscence = "MIT"
@@ -11,4 +11,5 @@ edition = "2018"
 
 [dependencies]
 tiny_http = "0.9.0"
-
+mp4 = "0.9.0"
+json = "0.12.4"

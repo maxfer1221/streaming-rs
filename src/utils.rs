@@ -32,12 +32,17 @@ impl ResponseType {
     }
 }
 
-// failable + safe file fetching
-pub fn get_file(paths: Vec<&str>) -> std::io::Result<File> {
+fn get_true_wd() -> std::io::Result<PathBuf> {
     let mut wd: PathBuf = std::env::current_exe()?;
     wd.pop();
     wd.pop();
     wd.pop();
+    Ok(wd)
+}
+
+// failable + safe file fetching
+pub fn get_file(paths: Vec<&str>) -> std::io::Result<File> {
+    let mut wd: PathBuf = get_true_wd()?;
     wd.push("statics");
     println!("{:?}", wd);
     for path in paths {
@@ -48,4 +53,31 @@ pub fn get_file(paths: Vec<&str>) -> std::io::Result<File> {
     }
     println!("{:?}", wd);
     Ok(File::open(wd)?)
+}
+
+pub fn create_chunk_files(video_id: String, chunk_count: u16) -> std::io::Result<Vec<File>> {
+    let mut wd: PathBuf = get_true_wd()?;
+    wd.push("videos/");
+    if !video_id.eq("..".into()) { wd.push(video_id) }
+    else { return Err(Error::new(PermissionDenied, "'..' cannot be used for file pathing")); }
+    
+    let mut files: Vec<File> = Vec::with_capacity(2);
+
+    for i in 0..chunk_count {
+        wd.set_file_name(i.to_string());
+        wd.set_extension("mp4");
+        let f = File::create(&wd)?;
+        if i == 0 {
+            files[0] = f;
+        }
+        else if (i as f32 / 2.0).ceil() == (chunk_count as f32 / 2.0).ceil() {
+            files[1] = f;
+        };
+    }
+    Ok(files)
+}
+
+pub fn get_chunk_file() -> std::io::Result<()> {
+    unimplemented!("get_chunk_file not implemented");
+    Ok(())
 }
