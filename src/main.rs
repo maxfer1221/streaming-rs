@@ -19,9 +19,10 @@ fn main() {
     println!("Server listening on: {}", ip);
 
     for mut request in server.incoming_requests() {
+        println!("{:?}", request);
         thread::spawn(move || {
             let s = request.url().to_string().clone();
-            let split = s.split('/').collect::<Vec<&str>>()[1..0].to_vec();
+            let split = s.split('/').collect::<Vec<&str>>()[1..].to_vec();
             // let split: Vec<&str> = (*request.url()).split('/').collect::<Vec<&str>>()[1..].to_vec();
 
             let response = match parse::create_response(&mut request, split) {

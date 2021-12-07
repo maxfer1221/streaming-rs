@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Stream-RS</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/assets/upload.js" type="text/javascript" href></script>
+  </head>
+  <body>
+      <form onsubmit="event.preventDefault(); post_req(file.files[0], id.value).then((o) => output.value = o);">
+        <h4>Video Id</h4>
+        <input type="text" name="id" value="">
+        <h4>Video File</h4>
+        <input type="file" name="file">
+        <h4>POST Request Response</h4>
+        <output name="output" class="output"></output>
+        <input type="submit">
+    </form>
+  </body>
+</html>
